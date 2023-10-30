@@ -1,0 +1,25 @@
+.contenedor-imagen,
+.contenedor-mapa {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.imagen-reducida {
+  max-width: 100%;
+  height: auto;
+}
+
+.contenedor-mapa {
+  margin-top: 80px;
+}
+
+.contenedor-mapa iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+label {
+    position: absolute;
+    top: 240px; 
+  }
