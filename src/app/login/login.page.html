@@ -15,11 +15,11 @@
     <ion-progress-bar *ngIf="auth.$cargando | async" type="indeterminate"></ion-progress-bar>
     <ion-item>
       <ion-label position="floating">Ingresa tu usuario:</ion-label>
-      <ion-input type="text" formControlName="usuario"></ion-input>
+      <ion-input [clearInput]="true" type="text" formControlName="usuario"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Ingresa contraseña:</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-input [clearInput]="true" type="password" formControlName="password"></ion-input>
     </ion-item>
 
     <ion-button type="submit" expand="block">Entrar</ion-button>

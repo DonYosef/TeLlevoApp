@@ -5,7 +5,6 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-card *ngIf="usuarioActivo">
     <img [src]="usuarioActivo.image">
@@ -15,9 +14,8 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-text> {{ usuarioActivo.firstName }} {{ usuarioActivo.lastName }} </ion-text>
+        <ion-text>{{ usuarioActivo.firstName }} {{ usuarioActivo.lastName }}</ion-text>
       </ion-item>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

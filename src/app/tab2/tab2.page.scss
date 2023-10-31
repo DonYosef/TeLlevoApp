@@ -1,22 +1,17 @@
-.contenedor-imagen,
+
 .contenedor-mapa {
   display: flex;
   justify-content: center; 
   align-items: center; 
+  max-width: 100%;
+  height: auto;
+  margin-top: auto;
 }
 
 .imagen-reducida {
   max-width: 100%;
   height: auto;
-}
-
-.contenedor-mapa {
-  margin-top: 2px;
-}
-
-.contenedor-mapa iframe {
-  max-width: 100%;
-  height: auto;
+  margin-top: 10%;
 }
 
 .tolbar{
