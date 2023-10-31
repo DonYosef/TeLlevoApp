@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
 
   public intentarLogear(){
     if(!this.formularioLogin.valid){
-      alert("formulario invalido");
+      alert("Datos incorrectos, vuelva a intentarlo");
       this.formularioLogin.controls['usuario'].setValue("");
       this.formularioLogin.controls['password'].setValue("");
       this.formularioLogin.clearValidators();

@@ -1,5 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar >
+    <ion-title *ngIf="usuarioActivo">
+      Bienvenid@ {{usuarioActivo.username}}!
+    </ion-title>
+    <div slot="end">
+      <ion-icon routerLink='/' name="log-out-outline" style="margin-right: 25px;"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
 <ion-tabs>
-
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1" href="/tabs/tab1">
       <ion-icon name="car-outline"></ion-icon>
@@ -17,3 +26,4 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
+

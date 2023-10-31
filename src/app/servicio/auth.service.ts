@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   public intentarLogear(usuario: string, password: string ){
-    this.cargando.next(true);
+    this.cargando.next(true)
     this.http.post<UsuarioLogeado>(this.URL_LOGIN, JSON.stringify({
       username: usuario,
       password: password
@@ -43,7 +43,8 @@ export class AuthService {
     .subscribe( resultado => {
       this.usuarioActivo.next(resultado);
       this.cargando.next(false);
-      this.router.navigate(['menu']);
+      this.router.navigate(['tabs'])
+
     });
   }
 }

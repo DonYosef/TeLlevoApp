@@ -7,11 +7,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card *ngIf="usuarioActivo">
+    <img [src]="usuarioActivo.image">
+    <ion-card-header>
+      <ion-card-title>Bienvenid@</ion-card-title>
+      <ion-card-subtitle> {{ usuarioActivo.username}} </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-text> {{ usuarioActivo.firstName }} {{ usuarioActivo.lastName }} </ion-text>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
 </ion-content>
