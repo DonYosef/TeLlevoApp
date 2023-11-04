@@ -13,10 +13,11 @@
   <ion-card color="warning">
     <ion-card-header>
       <ion-card-title>Total de Viajes</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-subtitle>
+        {{contador}}
+      </ion-card-subtitle>
     </ion-card-header> 
   </ion-card>
-
   <ion-card color="light">
     <ion-card-header>
       <ion-card-title>Crear viaje</ion-card-title>
@@ -30,7 +31,6 @@
       </ion-card-subtitle>             
     </ion-card-header>
   </ion-card>
-  <ion-button expand="block" class="blue-button">Crear Viaje</ion-button>
-  <ion-button expand="block" class="yellow-button">Limpiar</ion-button>
+  <ion-button (click)="botonClick()">Crear Viaje</ion-button>
   <ion-button expand="block" class="yellow-button">Limpiar</ion-button>
 </ion-content>
