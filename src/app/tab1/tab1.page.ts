@@ -13,4 +13,9 @@ export class Tab1Page {
     this.contador++;
     return this.contador;
   }
+  limpiarCampos() {
+    (<HTMLInputElement>document.getElementById('destino')).value = '';
+    (<HTMLInputElement>document.getElementById('capacidad')).value = '';
+    (<HTMLInputElement>document.getElementById('tarifa')).value = '';
+  }
 }
