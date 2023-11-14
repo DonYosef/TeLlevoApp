@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 import { AuthService } from './../servicio/auth.service';
-//         Servicio    Clase
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage  {
+
+
+
   public formularioLogin: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    public auth: AuthService
+    private router: Router,
+    private storage: Storage,
+    private auth: AuthService
   ) {
     this.formularioLogin = formBuilder.group({
       usuario: ['',
@@ -37,9 +44,6 @@ export class LoginPage implements OnInit {
       this.formularioLogin.controls['usuario'].value,
       this.formularioLogin.controls['password'].value
     )
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioLogeado } from './../modelos/usuarioLogeado';
-import { AuthService } from './../servicio/auth.service';
-import { ViewWillEnter, ViewDidLeave } from '@ionic/angular';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../servicio/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -11,22 +9,22 @@ import { Subscription } from 'rxjs';
 })
 
 
-export class TabsPage implements ViewWillEnter, ViewDidLeave{
+export class TabsPage implements OnInit{
 
-  public usuarioActivo: UsuarioLogeado | null = null;
-  private suscripcion: Subscription | null = null;
-  constructor(
-    private auth: AuthService
-  ) {}
+  mensaje: string = "";
 
-  ionViewDidLeave(): void {
-    this.suscripcion?.unsubscribe();
+  constructor( private auth : AuthService) {
   }
 
-  ionViewWillEnter(): void {
-      this.suscripcion =  this.auth.$usuarioActivo.subscribe( usuario => {
-      this.usuarioActivo = usuario;
-    })
+  public cerrarSesion(){
+    this.auth.cerrarSesion();
+  }
+
+  public sesion = sessionStorage.getItem('nombreUsuario');
+  public sesion2 = sessionStorage.getItem('apellidoUsuario');
+  public sesion3 = sessionStorage.getItem('email');
+
+  ngOnInit() {
   }
 
 }

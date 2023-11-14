@@ -1,10 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar >
-    <ion-title *ngIf="usuarioActivo">
-      Bienvenid@ {{usuarioActivo.username}}!
+    <ion-title >
+      Bienvenido {{sesion}} {{sesion2}}
     </ion-title>
     <div slot="end">
-      <ion-icon routerLink="/login" name="log-out-outline" style="margin-right: 25px;"></ion-icon>
+      <ion-item (click)="cerrarSesion()">
+        <ion-text style="padding-right: 7px;">Cerrar sesion</ion-text>
+        <ion-icon routerLink="/login" name="log-out-outline" style="width: 30px; height:30px;"></ion-icon>
+      </ion-item>
     </div>
   </ion-toolbar>
 </ion-header>

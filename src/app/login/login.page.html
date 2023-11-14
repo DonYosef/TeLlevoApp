@@ -11,10 +11,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <form [formGroup]="formularioLogin" (ngSubmit)="intentarLogear()">
-    <ion-progress-bar *ngIf="auth.$cargando | async" type="indeterminate"></ion-progress-bar>
+  <form [formGroup]="formularioLogin">
     <ion-item>
-      <ion-label position="floating">Ingresa tu usuario:</ion-label>
+      <ion-label position="floating">Ingrese su correo:</ion-label>
       <ion-input [clearInput]="true" type="text" formControlName="usuario"></ion-input>
     </ion-item>
     <ion-item>
@@ -22,7 +21,11 @@
       <ion-input [clearInput]="true" type="password" formControlName="password"></ion-input>
     </ion-item>
 
-    <ion-button type="submit" expand="block">Entrar</ion-button>
+    <ion-button (click)="intentarLogear()" type="submit" expand="block">Entrar</ion-button>
+    <div class="ion-text-center">
+      <a  [routerLink]="['/registro']">¿No tienes cuenta? Registrate aquí</a>
+    </div>
+
   </form>
 
 </ion-content>
