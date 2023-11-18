@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, delay } from 'rxjs';
 import { UsuarioLogeado } from './../modelos/usuarioLogeado';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-    public listaLocal: UsuarioLogeado[] = [];
+    public usuarioEncontrado2: UsuarioLogeado[] = [];
+    public usuarioEncountered: UsuarioLogeado[] = [];
     public usuariosBase: UsuarioLogeado[] = [
         {
             "nombre": "José",
@@ -35,40 +36,40 @@ export class AuthService {
     ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
   ) {
 
   }
 
+
+
 async intentarLogear(usuario: string, password: string ){
-  for(let i = 0; i < localStorage.length; i++){
-    this.listaLocal.push(JSON.parse(localStorage.getItem('usuario'+i) || '{}'));
-    let usuarioEncontrado2 = this.listaLocal.forEach( u => u.email == usuario && u.password == password);
-    console.log(usuarioEncontrado2)
-  };
+  let usuarioEncountered = this.usuariosBase.find( u => u.email == usuario && u.password == password);
 
-    const usuarioEncontrado = this.usuariosBase.find( u => u.email == usuario && u.password == password);
-    
-    if(usuarioEncontrado){
-            sessionStorage.setItem('nombreUsuario', usuarioEncontrado.nombre);
-            sessionStorage.setItem('apellidoUsuario', usuarioEncontrado.apellido);
-            sessionStorage.setItem('email', usuarioEncontrado.email);
+  this.usuarioEncontrado2 =  JSON.parse(localStorage.getItem('usuarios') || '[]');
+  let usuarioEncontrado = this.usuarioEncontrado2.find( u => u.email == usuario && u.password == password);
+
+  if(usuarioEncontrado){
+      sessionStorage.setItem('nombreUsuario', usuarioEncontrado.nombre);
+      sessionStorage.setItem('apellidoUsuario', usuarioEncontrado.apellido);
+      sessionStorage.setItem('email', usuarioEncontrado.email);
+      this.router.navigate(['tabs'])
+  }else if(usuarioEncountered){
+            sessionStorage.setItem('nombreUsuario', usuarioEncountered.nombre);
+            sessionStorage.setItem('apellidoUsuario', usuarioEncountered.apellido);
+            sessionStorage.setItem('email', usuarioEncountered.email);
             this.router.navigate(['tabs'])
-
-    // }else if(usuarioEncontrado2){
-    //     console.log(this.usuarioEncontrado2)
-    //     // sessionStorage.setItem('nombreUsuario', this.usuarioEncontrado2.usuario);
-    //     // sessionStorage.setItem('apellidoUsuario', this.usuarioEncontrado2.apellido);
-    //     // sessionStorage.setItem('email', this.usuarioEncontrado2.email);
-    //     // this.router.navigate(['tabs'])
-    }
-    else{
-            alert("Usuario no encontrado") 
-
-    }
+  }else{
+    const alert = await this.alertController.create({
+      header: 'Ingreso denegado',
+      message: 'Correo/contraseña incorrectos, vuelva a intentarlo',
+      buttons: ['OK']
+    });
+    await alert.present();
+    return;
+  }
 }
-
-
 
 public cerrarSesion(){
     sessionStorage.removeItem('nombreUsuario');
@@ -77,26 +78,4 @@ public cerrarSesion(){
     this.router.navigate(['/login'])
 }
 
-
 }
-
-
-//     this.cargando.next(true)
-//     this.http.post<UsuarioLogeado>(this.URL_LOGIN, JSON.stringify({
-//       username: usuario,
-//       password: password
-//     }),
-//     {
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     }
-//     )
-//     .pipe(delay(2000))
-//     .subscribe( resultado => {
-//       this.usuarioActivo.next(resultado);
-//       this.cargando.next(false);
-//       this.router.navigate(['tabs'])
-
-//     });
-//   }

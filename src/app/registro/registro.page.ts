@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { usuarioRegistrado } from '../modelos/usuarioRegistrado';
 
 @Component({
   selector: 'app-registro',
@@ -11,7 +10,6 @@ import { usuarioRegistrado } from '../modelos/usuarioRegistrado';
 })
 export class RegistroPage implements OnInit {
 
-  public usuario: usuarioRegistrado[] = [];
   public formularioRegistro: FormGroup;
   public contador = localStorage.length+1;
 
@@ -24,26 +22,27 @@ export class RegistroPage implements OnInit {
     this.formularioRegistro = formBuilder.group({
       primerNombre: ['',
                 [Validators.required,
-                  Validators.minLength(3),
-                    Validators.maxLength(15)]   ],
+                  Validators.minLength(2),
+                    Validators.maxLength(20)]   
+      ],
       primerApellido: ['',
         [Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(15)]
+          Validators.minLength(2),
+          Validators.maxLength(20)]
       ],
       telefono: ['',
         [Validators.minLength(3),
           Validators.maxLength(15)]
       ],
       email: ['',
-        [Validators.required,
+          [
           Validators.minLength(3),
-          Validators.maxLength(15)]
+          Validators.maxLength(25)]
       ],
       password: ['',
         [Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(15)]
+          Validators.maxLength(25)]
       ]
     });
   }
@@ -62,21 +61,28 @@ export class RegistroPage implements OnInit {
       await alert.present();
       return;
     }
-    this.usuario = [{
+
+    let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    
+    let nuevoUsuario = {
       nombre: f.primerNombre,
       apellido: f.primerApellido,
       telefono: f.telefono,
       email: f.email,
       password: f.password
-      }]
-    localStorage.setItem('usuario'+this.contador, JSON.stringify(this.usuario));
+      }
+
+      usuariosGuardados.push(nuevoUsuario);
+
+    localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
+
     this.formularioRegistro.controls['primerNombre'].setValue("");
     this.formularioRegistro.controls['primerApellido'].setValue("");
     this.formularioRegistro.controls['telefono'].setValue("");
     this.formularioRegistro.controls['email'].setValue("");
     this.formularioRegistro.controls['password'].setValue("");
     this.formularioRegistro.clearValidators();
-    this.contador++;
+
     this.router.navigate(['/login']);
 
   }
