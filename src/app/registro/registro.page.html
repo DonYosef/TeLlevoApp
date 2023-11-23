@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-title>Ingresa tus datos:</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="formularioRegistro" (ngSubmit)="registrar()">
+    <ion-list>
+      <ion-item>
+        <ion-input type="text"  fill="solid" labelPlacement="floating" formControlName="primerNombre">
+          <div slot="label">Primer nombre<ion-text color="danger">(*)</ion-text></div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text"  fill="solid" labelPlacement="floating" formControlName="primerApellido">
+          <div slot="label">Segundo nombre<ion-text color="danger">(*)</ion-text></div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" fill="solid" labelPlacement="floating" formControlName="telefono">
+          <div slot="label">Telefono</div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="email" fill="solid" labelPlacement="floating" formControlName="email">
+          <div slot="label">Correo electronico<ion-text color="danger">(*)</ion-text></div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password"  fill="solid" labelPlacement="floating" formControlName="password">
+          <div slot="label">Contraseña<ion-text color="danger">(*)</ion-text></div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" fill="solid" labelPlacement="floating" formControlName="password">
+          <div slot="label">Repita su contraseña<ion-text color="danger">(*)</ion-text></div>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button size="default" type="submit">Registrar cuenta</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>

@@ -1,12 +1,9 @@
 export interface UsuarioLogeado {
 
-  id: number;
-  username: string;
+  nombre: string;
+  apellido: string;
+  telefono: string;
   email: string;
-  firstName: string;
-  lastName: string;
-  gender: "female" | "male";
-  image: string;
-  token: string;
-
+  password: string;
+  
 }

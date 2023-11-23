@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioLogeado } from './../modelos/usuarioLogeado';
-import { AuthService } from './../servicio/auth.service';
 import { ViewWillEnter, ViewDidLeave } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
@@ -14,20 +13,13 @@ import { Subscription } from 'rxjs';
 
 export class Tab3Page implements ViewWillEnter, ViewDidLeave{
 
-  public usuarioActivo: UsuarioLogeado | null = null;
-  private suscripcion: Subscription | null = null;
-  constructor(
-    private auth: AuthService
-  ) {}
-
+  constructor( ) {}
   ionViewDidLeave(): void {
-    this.suscripcion?.unsubscribe();
+    throw new Error('Method not implemented.');
+  }
+  ionViewWillEnter(): void {
+    throw new Error('Method not implemented.');
   }
 
-  ionViewWillEnter(): void {
-      this.suscripcion =  this.auth.$usuarioActivo.subscribe( usuario => {
-      this.usuarioActivo = usuario;
-    })
-  }
 
 }
