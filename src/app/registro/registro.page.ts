@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-registro',
@@ -17,13 +18,13 @@ export class RegistroPage implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     public alertController: AlertController,
-
-    ) { 
+    private storage: Storage
+    ) {
     this.formularioRegistro = formBuilder.group({
       primerNombre: ['',
                 [Validators.required,
                   Validators.minLength(2),
-                    Validators.maxLength(20)]   
+                    Validators.maxLength(20)]
       ],
       primerApellido: ['',
         [Validators.required,
@@ -47,7 +48,9 @@ export class RegistroPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.storage.create();
+    console.log("storage creado")
   }
 
   async registrar(){
@@ -62,19 +65,24 @@ export class RegistroPage implements OnInit {
       return;
     }
 
-    let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    
+    let usuariosGuardados = await this.storage.get('usuarios') || '[]';
+    console.log("obteniendo usuario");
+
     let nuevoUsuario = {
       nombre: f.primerNombre,
       apellido: f.primerApellido,
       telefono: f.telefono,
       email: f.email,
       password: f.password
-      }
+    };
 
-      usuariosGuardados.push(nuevoUsuario);
+    let usuariosGuardadosArray = JSON.parse(usuariosGuardados);
+    usuariosGuardadosArray.push(nuevoUsuario);
 
-    localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
+    let usuariosGuardadosUpdated = JSON.stringify(usuariosGuardadosArray);
+
+    //localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
+    this.storage.set('usuarios', usuariosGuardadosUpdated);
 
     this.formularioRegistro.controls['primerNombre'].setValue("");
     this.formularioRegistro.controls['primerApellido'].setValue("");
