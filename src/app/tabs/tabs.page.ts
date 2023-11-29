@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage-angular';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../servicio/auth.service';
@@ -11,20 +12,30 @@ import { AuthService } from '../servicio/auth.service';
 
 export class TabsPage implements OnInit{
 
-  mensaje: string = "";
+  sesion: any;
+  sesion2: any;
+  sesion3: any;
 
-  constructor( private auth : AuthService) {
+  constructor( private auth : AuthService,
+    private storage: Storage) {
   }
 
   public cerrarSesion(){
     this.auth.cerrarSesion();
   }
 
-  public sesion = sessionStorage.getItem('nombreUsuario');
-  public sesion2 = sessionStorage.getItem('apellidoUsuario');
-  public sesion3 = sessionStorage.getItem('email');
 
   ngOnInit() {
+    this.storage.get('nombreUsuario').then((val) => {
+      this.sesion = val
+    });
+      this.storage.get('apellidoUsuario').then((val2) => {
+       this.sesion2 = val2
+      }) ;
+    this.storage.get('email').then((val3) => {
+      this.sesion3 = val3
+    });
+
   }
 
 }

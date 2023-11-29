@@ -47,10 +47,6 @@ export class AuthService implements OnInit {
   }
 
 
-  //
-  // let value = await this.storage.get('usuarios');
-  // console.log(value);
-
 
   async intentarLogear(usuario: string, password: string){
     let usuarioEncountered = this.usuariosBase.find( u => u.email == usuario && u.password == password);
@@ -61,14 +57,14 @@ export class AuthService implements OnInit {
     let usuarioEncontrado = this.usuarioEncontrado2.find( u => u.email == usuario && u.password == password);
 
     if(usuarioEncontrado){
-        sessionStorage.setItem('nombreUsuario', usuarioEncontrado.nombre);
-        sessionStorage.setItem('apellidoUsuario', usuarioEncontrado.apellido);
-        sessionStorage.setItem('email', usuarioEncontrado.email);
+      this.storage.set('nombreUsuario', usuarioEncontrado.nombre);
+      this.storage.set('apellidoUsuario', usuarioEncontrado.apellido);
+      this.storage.set('email', usuarioEncontrado.email);
         this.router.navigate(['tabs'])
     }else if(usuarioEncountered){
-              sessionStorage.setItem('nombreUsuario', usuarioEncountered.nombre);
-              sessionStorage.setItem('apellidoUsuario', usuarioEncountered.apellido);
-              sessionStorage.setItem('email', usuarioEncountered.email);
+              this.storage.set('nombreUsuario', usuarioEncountered.nombre);
+              this.storage.set('apellidoUsuario', usuarioEncountered.apellido);
+              this.storage.set('email', usuarioEncountered.email);
               this.router.navigate(['tabs'])
     }else{
       const alert = await this.alertController.create({
@@ -82,9 +78,9 @@ export class AuthService implements OnInit {
 }
 
 public cerrarSesion(){
-    sessionStorage.removeItem('nombreUsuario');
-    sessionStorage.removeItem('apellidoUsuario');
-    sessionStorage.removeItem('email');
+    this.storage.remove('nombreUsuario');
+    this.storage.remove('apellidoUsuario');
+    this.storage.remove('email');
     this.router.navigate(['/login'])
 }
 
